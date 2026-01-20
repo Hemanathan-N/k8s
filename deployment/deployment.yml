@@ -8,6 +8,13 @@ spec:
   replicas: 2  # number of pods you want to run
   strategy:
     type: RollingUpdate
+      maxSurge: 1          
+      # Kubernetes can create 1 extra new pod 
+      # Helps bring new version up safely
+      maxUnavailable: 0    
+      # No pod is taken down until new pod is ready 
+      # Ensures 100% availability
+      # 👉 This is a safe production-style configuration
   selector:
     matchLabels:
       app: calculator-app
